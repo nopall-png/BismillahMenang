@@ -9,27 +9,12 @@
       background-color: #111;
       color: white;
     }
-    .video-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    .video-container img {
-      border: 3px solid #00ffff;
-      border-radius: 10px;
-      width: 640px;
-      height: 480px;
-    }
   </style>
 </head>
 <body>
   <div class="container mt-5 text-center">
     <h2 class="mb-4">📸 Daftarkan Wajah Anda</h2>
 
-    <!-- TAMPILAN KAMERA -->
-    <div class="video-container mb-4">
-      <img src="{{ url_for('video_register') }}" alt="Live Camera Preview">
-    </div>
 
     <!-- FORM PENDAFTARAN -->
     <form method="POST" action="/register">

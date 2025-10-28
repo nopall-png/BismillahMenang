@@ -8,11 +8,33 @@
 <body class="bg-dark text-white text-center">
   <div class="container mt-5">
     <h2>🎥 Perekaman Wajah Sedang Berlangsung</h2>
-    <p>Pastikan wajah terlihat jelas di kamera. Proses otomatis berhenti setelah 30 tangkapan.</p>
+    <p class="text-secondary">Ikuti instruksi yang muncul di bagian atas video, lalu klik tombol <strong>Ambil</strong> untuk menyimpan gambar sesuai instruksi.</p>
+
     <img src="{{ url_for('video_register') }}" width="640" height="480" class="border border-light rounded mt-3">
-    <div class="mt-4">
-      <a href="/" class="btn btn-light">Selesai</a>
+
+    <div class="mt-3">
+      <button id="captureBtn" class="btn btn-info">Ambil sesuai instruksi</button>
+      <a href="/" class="btn btn-light ms-2">Selesai</a>
     </div>
+
+    <div id="captureMsg" class="mt-3 text-secondary"></div>
   </div>
+
+  <script>
+    document.getElementById('captureBtn').addEventListener('click', async () => {
+      const msg = document.getElementById('captureMsg');
+      msg.textContent = 'Meminta pengambilan...';
+      try {
+        const res = await fetch('/capture', { method: 'POST' });
+        if (res.ok) {
+          msg.textContent = 'Pengambilan dimulai. Tahan pose hingga selesai.';
+        } else {
+          msg.textContent = 'Gagal memulai pengambilan.';
+        }
+      } catch (e) {
+        msg.textContent = 'Terjadi kesalahan jaringan.';
+      }
+    });
+  </script>
 </body>
 </html>
